@@ -61,9 +61,9 @@ class _CalculatorState  extends State<Calculator>{
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                numButton("C", (Colors.grey[850])!, Colors.white),
-                numButton("+/-", (Colors.grey[850])!, Colors.white),
-                numButton("%", (Colors.grey[850])!, Colors.white),
+                numButton("C", Colors.grey.shade500, Colors.black),
+                numButton("+/-", Colors.grey.shade500, Colors.black),
+                numButton("%", Colors.grey.shade500, Colors.black),
                 numButton("/", Colors.orange, Colors.white),
               ],
             ),
