@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 class Calculator extends StatefulWidget {
   @override
   State<Calculator> createState() => _CalculatorState();
-
 }
 
-class _CalculatorState  extends State<Calculator>{
-  Widget numButton(String btnText,Color btnColor,Color txtColor){
+class _CalculatorState extends State<Calculator> {
+  Widget numButton(String btnText, Color btnColor, Color txtColor) {
     return ElevatedButton(
-      onPressed: () => {},
+      onPressed: () => {calculate(btnText)},
       child: Text(
         btnText,
         style: TextStyle(
@@ -24,15 +23,14 @@ class _CalculatorState  extends State<Calculator>{
         primary: btnColor,
       ),
     );
-  }//NumberButton
-
+  } //NumberButton
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        centerTitle: true ,
+        centerTitle: true,
         title: Text('Calculator'),
         backgroundColor: Colors.black,
       ),
@@ -47,14 +45,10 @@ class _CalculatorState  extends State<Calculator>{
                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
-                    "0",
+                    text,
                     textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 80
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 80),
                   ),
-
                 ),
               ],
             ),
@@ -67,17 +61,21 @@ class _CalculatorState  extends State<Calculator>{
                 numButton("/", Colors.orange, Colors.white),
               ],
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 numButton("7", (Colors.grey[850])!, Colors.white),
-                numButton("8",(Colors.grey[850])! , Colors.white),
+                numButton("8", (Colors.grey[850])!, Colors.white),
                 numButton("9", (Colors.grey[850])!, Colors.white),
                 numButton("X", Colors.orange, Colors.white),
               ],
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -87,7 +85,9 @@ class _CalculatorState  extends State<Calculator>{
                 numButton("-", Colors.orange, Colors.white),
               ],
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -97,7 +97,9 @@ class _CalculatorState  extends State<Calculator>{
                 numButton("+", Colors.orange, Colors.white),
               ],
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -107,7 +109,7 @@ class _CalculatorState  extends State<Calculator>{
                     padding: EdgeInsets.fromLTRB(28, 12, 90, 12),
                     child: Text(
                       "0",
-                      style: TextStyle(fontSize: 35,color: Colors.white),
+                      style: TextStyle(fontSize: 35, color: Colors.white),
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
@@ -124,5 +126,48 @@ class _CalculatorState  extends State<Calculator>{
         ),
       ),
     );
+  }
+
+  //Logic of Calculator
+
+  int firstNumber = 0;
+  int secondNumber = 0;
+  String result = "";
+  String text = "";
+  String operation = "";
+
+  void calculate(String btnText) {
+    if (btnText == "C") {
+       firstNumber = 0;
+       secondNumber = 0;
+       result = "";
+      text = "";
+    } else if (btnText == "+" ||
+        btnText == "-" ||
+        btnText == "X" ||
+        btnText == "/") {
+      firstNumber = int.parse(text);
+      result = "";
+      operation = btnText;
+    }else if(btnText == "="){
+      secondNumber = int.parse(text);
+      if(operation == "+"){
+        result = (firstNumber+secondNumber).toString();
+      }
+      if(operation == "-"){
+        result = (firstNumber-secondNumber).toString();
+      }
+      if(operation == "X"){
+        result = (firstNumber*secondNumber).toString();
+      }
+      if(operation == "/"){
+        result = (firstNumber/secondNumber).toString();
+      }
+    }else{
+      result = int.parse(text + btnText).toString();
+    }
+    setState(() {
+      text = result;
+    });
   }
 }
