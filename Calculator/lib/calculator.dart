@@ -25,6 +25,23 @@ class _CalculatorState extends State<Calculator> {
     );
   } //NumberButton
 
+  Widget zero(String btnText){
+    return ElevatedButton(
+      onPressed: () => {calculate(btnText)},
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(28, 12, 90, 12),
+        child: Text(
+          btnText,
+          style: TextStyle(fontSize: 35, color: Colors.white),
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        shape: StadiumBorder(),
+        primary: (Colors.grey[850])!,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,20 +120,7 @@ class _CalculatorState extends State<Calculator> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(28, 12, 90, 12),
-                    child: Text(
-                      "0",
-                      style: TextStyle(fontSize: 35, color: Colors.white),
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: StadiumBorder(),
-                    primary: (Colors.grey[850])!,
-                  ),
-                ),
+                zero("0"),
                 numButton(".", (Colors.grey[850])!, Colors.white),
                 numButton("=", Colors.orange, Colors.white),
               ],
