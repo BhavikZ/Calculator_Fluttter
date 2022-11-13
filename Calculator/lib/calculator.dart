@@ -10,14 +10,14 @@ class Calculator extends StatefulWidget {
 class _CalculatorState  extends State<Calculator>{
   Widget numButton(String btnText,Color btnColor,Color txtColor){
     return ElevatedButton(
-        onPressed: () => {},
-        child: Text(
-          btnText,
-          style: TextStyle(
-            fontSize: 25,
-            color: txtColor,
-          ),
+      onPressed: () => {},
+      child: Text(
+        btnText,
+        style: TextStyle(
+          fontSize: 25,
+          color: txtColor,
         ),
+      ),
       style: ElevatedButton.styleFrom(
         fixedSize: Size(70, 70),
         shape: CircleBorder(),
@@ -45,13 +45,13 @@ class _CalculatorState  extends State<Calculator>{
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                    padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Text(
                     "0",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 80
+                        color: Colors.white,
+                        fontSize: 80
                     ),
                   ),
 
@@ -101,20 +101,20 @@ class _CalculatorState  extends State<Calculator>{
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-               ElevatedButton(
-                   onPressed: () {},
-                   child: Padding(
-                     padding: EdgeInsets.fromLTRB(28, 12, 90, 12),
-                     child: Text(
-                       "0",
-                       style: TextStyle(fontSize: 35,color: Colors.white),
-                     ),
-                   ),
-                 style: ElevatedButton.styleFrom(
-                   shape: StadiumBorder(),
-                   primary: (Colors.grey[850])!,
-                 ),
-               ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(28, 12, 90, 12),
+                    child: Text(
+                      "0",
+                      style: TextStyle(fontSize: 35,color: Colors.white),
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(),
+                    primary: (Colors.grey[850])!,
+                  ),
+                ),
                 numButton(".", (Colors.grey[850])!, Colors.white),
                 numButton("=", Colors.orange, Colors.white),
               ],
