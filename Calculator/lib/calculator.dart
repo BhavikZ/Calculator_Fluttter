@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Calculator extends StatefulWidget {
   @override
@@ -9,7 +10,11 @@ class Calculator extends StatefulWidget {
 class _CalculatorState extends State<Calculator> {
   Widget numButton(String btnText, Color btnColor, Color txtColor) {
     return ElevatedButton(
-      onPressed: () => {calculate(btnText)},
+      onPressed: () =>
+      {
+        HapticFeedback.heavyImpact(),
+        calculate(btnText)
+      }, //on presed
       child: Text(
         btnText,
         style: TextStyle(
@@ -25,7 +30,7 @@ class _CalculatorState extends State<Calculator> {
     );
   } //NumberButton
 
-  Widget zero(String btnText){
+  Widget zero(String btnText) {
     return ElevatedButton(
       onPressed: () => {calculate(btnText)},
       child: Padding(
@@ -62,13 +67,27 @@ class _CalculatorState extends State<Calculator> {
                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
-                    text,
+                    history,
                     textAlign: TextAlign.left,
-                    style: TextStyle(color: Colors.white, fontSize: 80),
+                    style: TextStyle(color: Colors.grey.shade500, fontSize: 30),
                   ),
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                   text,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(color: Colors.white, fontSize: 70),
+                  ),
+                ),
+              ],
+            ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -139,14 +158,25 @@ class _CalculatorState extends State<Calculator> {
   String result = "";
   String text = "";
   String operation = "";
+  String history = "";
 
   void calculate(String btnText) {
     if (btnText == "C") {
-       firstNumber = 0;
-       secondNumber = 0;
-       result = "";
+      firstNumber = 0;
+      secondNumber = 0;
+      result = "";
       text = "";
-    } else if (btnText == "+" ||
+      history="";
+    }else if(btnText=="+/-"){
+      if(text[0]!='-'){
+        result="-"+text;
+      }
+      else
+        {
+          result=text.substring(1);
+        }
+    }
+    else if (btnText == "+" ||
         btnText == "-" ||
         btnText == "X" ||
         btnText == "/") {
@@ -157,15 +187,19 @@ class _CalculatorState extends State<Calculator> {
       secondNumber = int.parse(text);
       if(operation == "+"){
         result = (firstNumber+secondNumber).toString();
+        history=firstNumber.toString()+operation.toString()+secondNumber.toString();
       }
       if(operation == "-"){
         result = (firstNumber-secondNumber).toString();
+        history=firstNumber.toString()+operation.toString()+secondNumber.toString();
       }
       if(operation == "X"){
         result = (firstNumber*secondNumber).toString();
+        history=firstNumber.toString()+operation.toString()+secondNumber.toString();
       }
       if(operation == "/"){
         result = (firstNumber/secondNumber).toString();
+        history=firstNumber.toString()+operation.toString()+secondNumber.toString();
       }
     }else{
       result = int.parse(text + btnText).toString();
